@@ -16,11 +16,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Acer\\source\\repos\\Sistema_facturacion\\Sistema_facturacion.csproj",
+      "projectUniqueName": "c:\\Users\\Acer\\Desktop\\proyecti\\Sistema-Faturacion\\Sistema_facturacion\\Sistema_facturacion.csproj",
       "projectName": "Sistema_facturacion",
-      "projectPath": "C:\\Users\\Acer\\source\\repos\\Sistema_facturacion\\Sistema_facturacion.csproj",
+      "projectPath": "c:\\Users\\Acer\\Desktop\\proyecti\\Sistema-Faturacion\\Sistema_facturacion\\Sistema_facturacion.csproj",
       "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Acer\\source\\repos\\Sistema_facturacion\\obj\\",
+      "outputPath": "c:\\Users\\Acer\\Desktop\\proyecti\\Sistema-Faturacion\\Sistema_facturacion\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
