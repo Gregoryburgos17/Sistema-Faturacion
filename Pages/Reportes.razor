@@ -1,0 +1,35 @@
+﻿@page "/fetchdata"
+
+@using Sistema_facturacion.Data
+@inject WeatherForecastService ForecastService
+
+<h1>Reportes</h1>
+
+<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"> Reporte del listado de productos en existencia.</a>
+
+<hr class="sidebar-divider">
+
+    <table class="table">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td>Mesa</td>
+                <td>Mesa familiar con cuatro sillas</td>
+                <td>Caoba</td>
+                <td>25,000</td>
+                <td>07/08/2021</td>
+                <td>01</td>
+            </tr>
+            
+        </tbody>
+    </table>

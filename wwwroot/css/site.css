@@ -47,7 +47,7 @@ app {
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #040BA2 70%);
 }
 
     .sidebar .top-row {
@@ -96,6 +96,10 @@ app {
                 background-color: rgba(255,255,255,0.1);
                 color: white;
             }
+
+    .sidebar hr.sidebar-divider {
+        margin: 0 1rem 1rem;
+    }
 
 .content {
     padding-top: 1.1rem;
