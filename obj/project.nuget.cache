@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Ikr4XJcvWlIMay1LEN0GHZOypZKl04bhvKvZ+xm7rSCyCk7iJuwEmi3ClTaUOH7u0P02O0T3b5XiFvl7W/GIaQ==",
+  "dgSpecHash": "aCrr8psB3z3yfHopiQNeK0xm4aGWeNxHyVJbNdyDJgHUze9fraWmpLKeD0JXln7+PyA5MwyEsoATcEDSulZ8MQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dell\\Desktop\\Sistema-Faturacion\\Sistema_facturacion.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\abelb\\Desktop\\ITLA\\CUATRIMESTRES\\CUATRIMESTRE VI\\II. INTR. A LA ING. DE SOFTWARE\\MÓDULO VI - PROYECTO\\APP\\Sistema_facturacion.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\abelb\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
+  ],
   "logs": []
 }

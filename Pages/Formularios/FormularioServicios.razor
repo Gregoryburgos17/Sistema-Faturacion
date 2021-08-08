@@ -1,0 +1,96 @@
+﻿@page "/FormularioServicios"
+@using System.ComponentModel.DataAnnotations
+@using System.Text.Json
+@inject IJSRuntime JSRuntime;
+
+<div class="card m-3">
+    <h4 class="card-header">Servicios</h4>
+    <div class="card-body">
+        <EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit" @onreset="HandleReset">
+            <DataAnnotationsValidator />
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Nombre: </label>
+                    <InputText @bind-Value="model.Nombre" class="form-control" />
+                    <ValidationMessage For="@(() => model.Nombre)" />
+                </div>
+                <div class="form-group col">
+                    <label>Descripción: </label>
+                    <InputText @bind-Value="model.Descripcion" class="form-control" />
+                    <ValidationMessage For="@(() => model.Descripcion)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Tipo: </label>
+                    <InputText @bind-Value="model.Tipo" class="form-control" />
+                    <ValidationMessage For="@(() => model.Tipo)" />
+                </div>
+                <div class="form-group col">
+                    <label>Precio: </label>
+                    <InputText @bind-Value="model.Precio" type="password" class="form-control" />
+                    <ValidationMessage For="@(() => model.Precio)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Fecha: </label>
+                    <InputDate @bind-Value="model.Fecha" class="form-control" />
+                    <ValidationMessage For="@(() => model.Fecha)" />
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary mr-1">Guardar</button>
+                <NavLink class="nav-link d-inline" href="servicios">
+                    <button type="reset" class="btn btn-secondary">Cancelar</button>
+                </NavLink>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private Model model = new Model();
+    private EditContext editContext;
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(model);
+    }
+
+    private void HandleValidSubmit()
+    {
+        var modelJson = JsonSerializer.Serialize(model, new JsonSerializerOptions { WriteIndented = true });
+        JSRuntime.InvokeVoidAsync("alert", $"SUCCESS!! :-)\n\n{modelJson}");
+    }
+
+    private void HandleReset()
+    {
+        model = new Model();
+        editContext = new EditContext(model);
+    }
+
+    private class Model
+    {
+        [Required]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [Display(Name = "Descripción")]
+        public string Descripcion { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo")]
+        public string Tipo { get; set; }
+
+        [Required]
+        [Display(Name = "Precio")]
+        public string Precio { get; set; }
+
+        [Required]
+        [Display(Name = "Fecha")]
+        public DateTime? Fecha { get; set; }
+
+    }
+}

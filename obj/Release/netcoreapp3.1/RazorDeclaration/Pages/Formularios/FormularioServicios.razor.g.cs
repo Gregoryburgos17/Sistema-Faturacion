@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace Sistema_facturacion.Pages
+namespace Sistema_facturacion.Pages.Formularios
 {
     #line hidden
     using System;
@@ -75,22 +75,13 @@ using Sistema_facturacion.Shared;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 3 "C:\Users\abelb\Desktop\ITLA\CUATRIMESTRES\CUATRIMESTRE VI\II. INTR. A LA ING. DE SOFTWARE\MÓDULO VI - PROYECTO\APP\Pages\Reportes.razor"
-using Sistema_facturacion.Data;
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/fetchdata")]
-    public partial class Reportes : Microsoft.AspNetCore.Components.ComponentBase
+    public partial class FormularioServicios : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private WeatherForecastService ForecastService { get; set; }
     }
 }
 #pragma warning restore 1591
