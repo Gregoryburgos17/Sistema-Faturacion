@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sistema_facturacion.Data;
 
 namespace Sistema_facturacion.Migrations
 {
     [DbContext(typeof(DBFacturacionContext))]
-    partial class DBFacturacionContextModelSnapshot : ModelSnapshot
+    [Migration("20210811173613_AddTipoProductoTable")]
+    partial class AddTipoProductoTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,29 +58,11 @@ namespace Sistema_facturacion.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoProductos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nombre = "Carnes"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Nombre = "Frutas"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Nombre = "Vegetales"
-                        });
+                    b.ToTable("TipoProducto");
                 });
 
             modelBuilder.Entity("Sistema_facturacion.Data.Models.Producto", b =>
