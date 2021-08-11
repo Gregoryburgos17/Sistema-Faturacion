@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sistema_facturacion.Data;
+using Sistema_facturacion.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,8 @@ namespace Sistema_facturacion
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<ProductoRepository>();
+
             services.AddDbContext<DBFacturacionContext>(options =>
             {
                 options.UseSqlite(
