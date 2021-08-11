@@ -1,4 +1,7 @@
 ﻿@page "/productos"
+@using Sistema_facturacion.Data.Models
+@using Sistema_facturacion.Data.Repositories
+@inject ProductoRepository productoRepository
 
 <h1>Productos</h1>
 
@@ -24,17 +27,32 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Mesa</td>
-            <td>Mesa familiar con cuatro sillas</td>
-            <td>Caoba</td>
-            <td>25,000</td>
-            <td>07/08/2021</td>
-            <td>01</td>
-            <td>
-                <button class="btn btn-warning"><span class="oi oi-pencil" aria-hidden="true"></span></button>
-                <button class="btn btn-danger"><span class="oi oi-trash" aria-hidden="true"></span></button>
-            </td>
-        </tr>
+        @foreach (Producto product in productos)
+        {
+            <tr>
+                <td>@product.Nombre</td>
+                <td>@product.Descripcion</td>
+                <td>@product.TipoProducto</td>
+                <td>@product.Precio</td>
+                <td>@product.FechaRegistro</td>
+                <td>@product.Cantidad</td>
+                <td>
+                    <button class="btn btn-warning"><span class="oi oi-pencil" aria-hidden="true"></span></button>
+                    <button class="btn btn-danger"><span class="oi oi-trash" aria-hidden="true"></span></button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+@code {
+    private Producto producto = new();
+    List<Producto> productos = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        productos = await productoRepository.GetAllAsync();
+        StateHasChanged();
+    }
+}
