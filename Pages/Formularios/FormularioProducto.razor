@@ -1,47 +1,48 @@
 ﻿@page "/FormularioProducto"
 @using System.ComponentModel.DataAnnotations
-@using System.Text.Json
-@inject IJSRuntime JSRuntime;
+@using Sistema_facturacion.Data.Models
+@using Sistema_facturacion.Data.Repositories
+@inject ProductoRepository productoRepository
+@inject TipoProductoRepository tipoProductoRepository
+@inject NavigationManager navManager
 
 <div class="card m-3">
     <h4 class="card-header">Productos</h4>
     <div class="card-body">
-        <EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit" @onreset="HandleReset">
+        <EditForm Model="producto" OnValidSubmit="HandleValidSubmit">
             <DataAnnotationsValidator />
             <div class="form-row">
                 <div class="form-group col">
                     <label>Nombre: </label>
-                    <InputText @bind-Value="model.Nombre" class="form-control" />
-                    <ValidationMessage For="@(() => model.Nombre)" />
+                    <InputText @bind-Value="producto.Nombre" class="form-control" />
+                    <ValidationMessage For="@(() => producto.Nombre)" />
                 </div>
                 <div class="form-group col">
                     <label>Descripción: </label>
-                    <InputText @bind-Value="model.Descripcion" class="form-control" />
-                    <ValidationMessage For="@(() => model.Descripcion)" />
+                    <InputText @bind-Value="producto.Descripcion" class="form-control" />
+                    <ValidationMessage For="@(() => producto.Descripcion)" />
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col">
                     <label>Tipo: </label>
-                    <InputText @bind-Value="model.Tipo" class="form-control" />
-                    <ValidationMessage For="@(() => model.Tipo)" />
+                    <InputSelect @bind-Value="producto.TipoProductoID" class="form-control">
+                        @foreach (TipoProducto tipoProducto in tipoProductos)
+                        {
+                            <option label="@tipoProducto.Nombre" value="@tipoProducto.Id" />
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => producto.TipoProductoID)" />
                 </div>
                 <div class="form-group col">
                     <label>Precio: </label>
-                    <InputText @bind-Value="model.Precio" type="password" class="form-control" />
-                    <ValidationMessage For="@(() => model.Precio)" />
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Fecha: </label>
-                    <InputDate @bind-Value="model.Fecha" class="form-control" />
-                    <ValidationMessage For="@(() => model.Fecha)" />
+                    <InputNumber @bind-Value="producto.Precio" min="0" class="form-control" />
+                    <ValidationMessage For="@(() => producto.Precio)" />
                 </div>
                 <div class="form-group col">
                     <label>Cantidad: </label>
-                    <InputText @bind-Value="model.Cantidad" type="password" class="form-control" />
-                    <ValidationMessage For="@(() => model.Cantidad)" />
+                    <InputNumber @bind-Value="producto.Cantidad" min="1" class="form-control" />
+                    <ValidationMessage For="@(() => producto.Cantidad)" />
                 </div>
             </div>
             <div class="text-center">
@@ -55,50 +56,19 @@
 </div>
 
 @code {
-    private Model model = new Model();
-    private EditContext editContext;
+    private Producto producto = new();
+    List<TipoProducto> tipoProductos = new();
 
-    protected override void OnInitialized()
+    private async Task HandleValidSubmit()
     {
-        editContext = new EditContext(model);
+        producto.FechaRegistro = DateTime.Now;
+        await productoRepository.CreateAsync(producto);
+        navManager.NavigateTo("productos");
     }
 
-    private void HandleValidSubmit()
+    protected override async Task OnInitializedAsync()
     {
-        var modelJson = JsonSerializer.Serialize(model, new JsonSerializerOptions { WriteIndented = true });
-        JSRuntime.InvokeVoidAsync("alert", $"SUCCESS!! :-)\n\n{modelJson}");
-    }
-
-    private void HandleReset()
-    {
-        model = new Model();
-        editContext = new EditContext(model);
-    }
-
-    private class Model
-    {
-        [Required]
-        [Display(Name = "Nombre")]
-        public string Nombre { get; set; }
-
-        [Required]
-        [Display(Name = "Descripción")]
-        public string Descripcion { get; set; }
-
-        [Required]
-        [Display(Name = "Tipo")]
-        public string Tipo { get; set; }
-
-        [Required]
-        [Display(Name = "Precio")]
-        public string Precio { get; set; }
-
-        [Required]
-        [Display(Name = "Fecha")]
-        public DateTime? Fecha { get; set; }
-
-        [Required]
-        [Display(Name = "Cantidad")]
-        public string Cantidad { get; set; }
+        tipoProductos = await tipoProductoRepository.GetAllAsync();
+        StateHasChanged();
     }
 }
