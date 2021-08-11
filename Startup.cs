@@ -31,6 +31,7 @@ namespace Sistema_facturacion
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<ProductoRepository>();
+            services.AddScoped<TipoProductoRepository>();
 
             services.AddDbContext<DBFacturacionContext>(options =>
             {

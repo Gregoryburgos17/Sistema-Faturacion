@@ -21,16 +21,19 @@ namespace Sistema_facturacion.Data.Models
 
         [Required]
         [ForeignKey("TipoProducto")]
+        [Range(1, double.MaxValue, ErrorMessage = "The TipoProducto field is required.")]
         public int TipoProductoID { get; set; }
         public TipoProducto TipoProducto { get; set; }
 
         [Required]
+        [Range(double.Epsilon, double.MaxValue, ErrorMessage = "Precio must be greater than 0.")]
         public double Precio { get; set; }
 
         [Required]
         public DateTime FechaRegistro { get; set; }
 
         [Required]
+        [Range(1, double.MaxValue)] 
         public int Cantidad { get; set; }
     }
 }
