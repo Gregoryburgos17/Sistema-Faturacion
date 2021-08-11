@@ -13,68 +13,83 @@ namespace Sistema_facturacion.Pages.Formularios
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\abelb\Desktop\ITLA\CUATRIMESTRES\CUATRIMESTRE VI\II. INTR. A LA ING. DE SOFTWARE\MÓDULO VI - PROYECTO\APP\_Imports.razor"
+#line 1 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\abelb\Desktop\ITLA\CUATRIMESTRES\CUATRIMESTRE VI\II. INTR. A LA ING. DE SOFTWARE\MÓDULO VI - PROYECTO\APP\_Imports.razor"
+#line 2 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\abelb\Desktop\ITLA\CUATRIMESTRES\CUATRIMESTRE VI\II. INTR. A LA ING. DE SOFTWARE\MÓDULO VI - PROYECTO\APP\_Imports.razor"
+#line 3 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\abelb\Desktop\ITLA\CUATRIMESTRES\CUATRIMESTRE VI\II. INTR. A LA ING. DE SOFTWARE\MÓDULO VI - PROYECTO\APP\_Imports.razor"
+#line 4 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\abelb\Desktop\ITLA\CUATRIMESTRES\CUATRIMESTRE VI\II. INTR. A LA ING. DE SOFTWARE\MÓDULO VI - PROYECTO\APP\_Imports.razor"
+#line 5 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\abelb\Desktop\ITLA\CUATRIMESTRES\CUATRIMESTRE VI\II. INTR. A LA ING. DE SOFTWARE\MÓDULO VI - PROYECTO\APP\_Imports.razor"
+#line 6 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Users\abelb\Desktop\ITLA\CUATRIMESTRES\CUATRIMESTRE VI\II. INTR. A LA ING. DE SOFTWARE\MÓDULO VI - PROYECTO\APP\_Imports.razor"
+#line 7 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\abelb\Desktop\ITLA\CUATRIMESTRES\CUATRIMESTRE VI\II. INTR. A LA ING. DE SOFTWARE\MÓDULO VI - PROYECTO\APP\_Imports.razor"
+#line 8 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\_Imports.razor"
 using Sistema_facturacion;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\abelb\Desktop\ITLA\CUATRIMESTRES\CUATRIMESTRE VI\II. INTR. A LA ING. DE SOFTWARE\MÓDULO VI - PROYECTO\APP\_Imports.razor"
+#line 9 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\_Imports.razor"
 using Sistema_facturacion.Shared;
 
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\Pages\Formularios\FormularioServicios.razor"
+using System.ComponentModel.DataAnnotations;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\Pages\Formularios\FormularioServicios.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/FormularioServicios")]
     public partial class FormularioServicios : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -82,6 +97,57 @@ using Sistema_facturacion.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 52 "C:\Users\Legnar Acv2\Desktop\Programacion\Sistema-Facturacion\Pages\Formularios\FormularioServicios.razor"
+       
+    private Model model = new Model();
+    private EditContext editContext;
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(model);
+    }
+
+    private void HandleValidSubmit()
+    {
+        var modelJson = JsonSerializer.Serialize(model, new JsonSerializerOptions { WriteIndented = true });
+        JSRuntime.InvokeVoidAsync("alert", $"SUCCESS!! :-)\n\n{modelJson}");
+    }
+
+    private void HandleReset()
+    {
+        model = new Model();
+        editContext = new EditContext(model);
+    }
+
+    private class Model
+    {
+        [Required]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [Display(Name = "Descripción")]
+        public string Descripcion { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo")]
+        public string Tipo { get; set; }
+
+        [Required]
+        [Display(Name = "Precio")]
+        public string Precio { get; set; }
+
+        [Required]
+        [Display(Name = "Fecha")]
+        public DateTime? Fecha { get; set; }
+
+    }
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime JSRuntime { get; set; }
     }
 }
 #pragma warning restore 1591
