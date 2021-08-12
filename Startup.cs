@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Sistema_facturacion.Services;
+using Microsoft.JSInterop;
 
 namespace Sistema_facturacion
 {
@@ -32,6 +34,9 @@ namespace Sistema_facturacion
             services.AddServerSideBlazor();
             services.AddScoped<ProductoRepository>();
             services.AddScoped<TipoProductoRepository>();
+            services.AddSingleton<ExportServicePDF>();
+            services.AddAuthenticationCore();
+            services.AddSingleton<IJSInProcessRuntime>(services => (IJSInProcessRuntime)services.GetRequiredService<IJSRuntime>());
 
             services.AddDbContext<DBFacturacionContext>(options =>
             {

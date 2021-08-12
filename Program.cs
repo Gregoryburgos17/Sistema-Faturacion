@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,5 +25,8 @@ namespace Sistema_facturacion
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+
+
     }
 }
