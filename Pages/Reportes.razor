@@ -1,7 +1,10 @@
 ﻿@page "/fetchdata"
 
-@using Sistema_facturacion.Data
-@inject WeatherForecastService ForecastService
+@using Sistema_facturacion.Data.Models
+@using Sistema_facturacion.Data.Repositories
+@inject ProductoRepository productoRepository
+@inject NavigationManager navManager
+@inject IJSRuntime JSRuntime
 
 <h1>Reportes</h1>
 
@@ -9,27 +12,40 @@
 
 <hr class="sidebar-divider">
 
-    <table class="table">
-        <thead class="table-dark text-center">
+<table class="table">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Producto product in productos)
+        {
             <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Tipo</th>
-                <th>Precio</th>
-                <th>Fecha</th>
-                <th>Cantidad</th>
+                <td>@product.Nombre</td>
+                <td>@product.Descripcion</td>
+                <td>@product.TipoProducto</td>
+                <td>@product.Precio</td>
+                <td>@product.FechaRegistro</td>
+                <td>@product.Cantidad</td>
             </tr>
-        </thead>
-        <tbody>
-            
-            <tr>
-                <td>Mesa</td>
-                <td>Mesa familiar con cuatro sillas</td>
-                <td>Caoba</td>
-                <td>25,000</td>
-                <td>07/08/2021</td>
-                <td>01</td>
-            </tr>
-            
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
+
+@code {
+    List<Producto> productos = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        productos = await productoRepository.GetAllAsync();
+        StateHasChanged();
+    }
+
+}
