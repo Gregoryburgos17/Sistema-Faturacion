@@ -39,7 +39,9 @@
                 <td>@product.FechaRegistro</td>
                 <td>@product.Cantidad</td>
                 <td>
-                    <button class="btn btn-warning"><span class="oi oi-pencil" aria-hidden="true"></span></button>
+                    <a class="btn btn-warning" href="EditProduct/@product.Id">
+                        <span class="oi oi-pencil" aria-hidden="true"></span>
+                    </a>
                     <button class="btn btn-danger"><span class="oi oi-trash" aria-hidden="true" @onclick="() => Delete(product)"></span></button>
                 </td>
             </tr>

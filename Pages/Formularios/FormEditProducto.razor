@@ -1,0 +1,76 @@
+﻿@page "/EditProduct/{Id:int}"
+@using System.ComponentModel.DataAnnotations
+@using Sistema_facturacion.Data.Models
+@using Sistema_facturacion.Data.Repositories
+@inject ProductoRepository productoRepository
+@inject TipoProductoRepository tipoProductoRepository
+@inject NavigationManager navManager
+
+<div class="card m-3">
+    <h4 class="card-header">Editar Producto</h4>
+    <div class="card-body">
+        <EditForm Model="producto" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Nombre: </label>
+                    <InputText @bind-Value="producto.Nombre" class="form-control" />
+                    <ValidationMessage For="@(() => producto.Nombre)" />
+                </div>
+                <div class="form-group col">
+                    <label>Descripción: </label>
+                    <InputText @bind-Value="producto.Descripcion" class="form-control" />
+                    <ValidationMessage For="@(() => producto.Descripcion)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Tipo: </label>
+                    <InputSelect @bind-Value="producto.TipoProductoID" class="form-control">
+                        @foreach (TipoProducto tipoProducto in tipoProductos)
+                        {
+                            <option label="@tipoProducto.Nombre" value="@tipoProducto.Id" />
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => producto.TipoProductoID)" />
+                </div>
+                <div class="form-group col">
+                    <label>Precio: </label>
+                    <InputNumber @bind-Value="producto.Precio" min="0" class="form-control" />
+                    <ValidationMessage For="@(() => producto.Precio)" />
+                </div>
+                <div class="form-group col">
+                    <label>Cantidad: </label>
+                    <InputNumber @bind-Value="producto.Cantidad" min="1" class="form-control" />
+                    <ValidationMessage For="@(() => producto.Cantidad)" />
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary mr-1">Guardar</button>
+                <NavLink class="nav-link d-inline" href="productos">
+                    <button type="reset" class="btn btn-secondary">Cancelar</button>
+                </NavLink>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [Parameter] public int Id { get; set; }
+    private Producto producto = new();
+    List<TipoProducto> tipoProductos = new();
+
+    private async Task HandleValidSubmit()
+    {
+        producto.FechaRegistro = DateTime.Now;
+        await productoRepository.UpdateAsync(producto);
+        navManager.NavigateTo("productos");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        producto = await productoRepository.FindAsync(Id);
+        StateHasChanged();
+    }
+
+}
