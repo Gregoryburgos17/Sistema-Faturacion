@@ -32,7 +32,7 @@ namespace Sistema_facturacion.Data.Repositories
             return await Context.SaveChangesAsync();
         }
 
-        public async Task<T?> FindAsync(T obj) => await Context.Set<T>().FindAsync(obj);
+        public async Task<T?> FindAsync(int id) => await Context.Set<T>().FindAsync(id);
 
         public async Task<List<T>> GetAllAsync() => await Context.Set<T>().ToListAsync();
     }
