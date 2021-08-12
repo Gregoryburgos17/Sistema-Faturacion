@@ -62,13 +62,13 @@
 
     private async Task HandleValidSubmit()
     {
-        producto.FechaRegistro = DateTime.Now;
         await productoRepository.UpdateAsync(producto);
         navManager.NavigateTo("productos");
     }
 
     protected override async Task OnInitializedAsync()
     {
+        tipoProductos = await tipoProductoRepository.GetAllAsync();
         producto = await productoRepository.FindAsync(Id);
         StateHasChanged();
     }
