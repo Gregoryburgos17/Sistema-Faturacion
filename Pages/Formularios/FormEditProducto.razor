@@ -70,6 +70,7 @@
     {
         tipoProductos = await tipoProductoRepository.GetAllAsync();
         producto = await productoRepository.FindAsync(Id);
+        producto.TipoProducto = tipoProductos[(producto.TipoProductoID - 1)];
         StateHasChanged();
     }
 

@@ -2,6 +2,7 @@
 @using Sistema_facturacion.Data.Models
 @using Sistema_facturacion.Data.Repositories
 @inject ProductoRepository productoRepository
+@inject TipoProductoRepository tipoProductoRepository
 @inject NavigationManager navManager
 @inject IJSRuntime JSRuntime
 
@@ -34,7 +35,7 @@
             <tr>
                 <td>@product.Nombre</td>
                 <td>@product.Descripcion</td>
-                <td>@product.TipoProducto</td>
+                <td>@product.TipoProducto.Nombre</td>
                 <td>@product.Precio</td>
                 <td>@product.FechaRegistro</td>
                 <td>@product.Cantidad</td>
@@ -53,10 +54,16 @@
 @code {
     private Producto producto = new();
     List<Producto> productos = new();
+    List<TipoProducto> tipoProductos = new();
 
     protected override async Task OnInitializedAsync()
     {
         productos = await productoRepository.GetAllAsync();
+        tipoProductos = await tipoProductoRepository.GetAllAsync();
+        foreach (Producto prod in productos)
+        {
+            prod.TipoProducto = tipoProductos[(prod.TipoProductoID - 1)];
+        }
         StateHasChanged();
     }
 
