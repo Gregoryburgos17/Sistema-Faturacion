@@ -2,7 +2,6 @@
 @using Sistema_facturacion.Data.Models
 @using Sistema_facturacion.Data.Repositories
 @inject ProductoRepository productoRepository
-@inject TipoProductoRepository tipoProductoRepository
 @inject NavigationManager navManager
 @inject IJSRuntime JSRuntime
 
@@ -71,7 +70,4 @@
         }
         navManager.NavigateTo("/");
     }
-
-
-
 }

@@ -13,5 +13,7 @@ namespace Sistema_facturacion.Data.Models
 
         [Required]
         public string Nombre { get; set; }
+
+        public List<Producto> Productos { get; set; }
     }
 }
