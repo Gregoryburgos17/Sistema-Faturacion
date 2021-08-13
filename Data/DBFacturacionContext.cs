@@ -16,6 +16,7 @@ namespace Sistema_facturacion.Data
 
         public virtual DbSet<Producto> Productos { get; set; }
         public virtual DbSet<TipoProducto> TipoProductos { get; set; }
+        public virtual DbSet<Servicio> Servicios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -26,6 +27,10 @@ namespace Sistema_facturacion.Data
                 new() { Id = 3, Nombre = "Vegetales" }
             );
 
+            builder.Entity<Servicio>().HasData(
+                new() { Id = 1, Nombre = "Instalación" },
+                new() { Id = 2, Nombre = "Reparación" },
+                new() { Id = 3, Nombre = "Ensamblado" });
         }
     }
 }

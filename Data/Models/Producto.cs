@@ -35,5 +35,7 @@ namespace Sistema_facturacion.Data.Models
         [Required]
         [Range(1, double.MaxValue)] 
         public int Cantidad { get; set; }
+
+        public List<Servicio> Servicios { get; set; } = new();
     }
 }

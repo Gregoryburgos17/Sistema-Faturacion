@@ -15,7 +15,9 @@ namespace Sistema_facturacion.Data.Repositories
 
         public override IQueryable<Producto> Table()
         {
-            return Context.Productos.Include(p => p.TipoProducto);
+            return Context.Productos
+                .Include(p => p.TipoProducto)
+                .Include(p => p.Servicios);
         }
     }
 }
