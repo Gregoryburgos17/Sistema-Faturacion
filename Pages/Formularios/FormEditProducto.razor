@@ -69,8 +69,7 @@
     protected override async Task OnInitializedAsync()
     {
         tipoProductos = await tipoProductoRepository.GetAllAsync();
-        producto = await productoRepository.FindAsync(Id);
-        producto.TipoProducto = tipoProductos[(producto.TipoProductoID - 1)];
+        producto = await productoRepository.FindAsync(p => p.Id == Id);
         StateHasChanged();
     }
 

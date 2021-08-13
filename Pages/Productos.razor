@@ -54,16 +54,10 @@
 @code {
     private Producto producto = new();
     List<Producto> productos = new();
-    List<TipoProducto> tipoProductos = new();
 
     protected override async Task OnInitializedAsync()
     {
         productos = await productoRepository.GetAllAsync();
-        tipoProductos = await tipoProductoRepository.GetAllAsync();
-        foreach (Producto prod in productos)
-        {
-            prod.TipoProducto = tipoProductos[(prod.TipoProductoID - 1)];
-        }
         StateHasChanged();
     }
 
